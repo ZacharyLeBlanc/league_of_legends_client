@@ -1,6 +1,6 @@
 mod rate_limit;
 
-use crate::{client::ClientContext, error::Error};
+use super::{ClientContext, Error};
 use log::{debug, error};
 use rate_limit::RateLimit;
 use reqwest::{header::HeaderMap, Client, Response, StatusCode};
@@ -84,7 +84,7 @@ async fn handle_response<T: DeserializeOwned>(response: Response) -> Result<T> {
     }
 }
 
-pub async fn request<T: DeserializeOwned>(url: &str, context: ClientContext) -> Result<T> {
+pub async fn request<T: DeserializeOwned>(url: &str, context: &ClientContext) -> Result<T> {
     let mut headers = HeaderMap::new();
     headers.append(
         "X-Riot-Token",

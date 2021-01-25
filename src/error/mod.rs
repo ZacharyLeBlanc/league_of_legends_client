@@ -3,6 +3,7 @@ use std::time::Duration;
 use thiserror::Error;
 use url::ParseError;
 
+/// Possible error types from this crate.
 #[derive(Error, Debug)]
 pub enum Error {
     #[error("Bad Request")]

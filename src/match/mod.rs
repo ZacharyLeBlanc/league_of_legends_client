@@ -1,26 +1,27 @@
 use super::{
-    client::{Client, ClientContext},
-    dto::{MatchDTO, MatchListDTO},
     enums::Region,
     proxy::{request, Result},
+    types::{Match as MatchDTO, MatchList},
+    Client, ClientContext,
 };
 use std::collections::HashSet;
 use url::Url;
 
 impl Client {
-    pub fn r#match(self) -> Match {
+    pub fn r#match(&self) -> Match {
         Match {
-            context: self.context,
+            context: &self.context,
         }
     }
 }
 
+/// Namespace for the match related APIs.
 #[derive(Clone)]
-pub struct Match {
-    context: ClientContext,
+pub struct Match<'a> {
+    context: &'a ClientContext,
 }
 
-impl Match {
+impl Match<'_> {
     pub async fn get_match_by_id(self, region: Region, match_id: i64) -> Result<MatchDTO> {
         let url = Url::parse(&format!(
             "https://{}/lol/match/v4/matches/{}",
@@ -41,7 +42,7 @@ impl Match {
         begin_time: Option<i64>,
         end_index: Option<i32>,
         begin_index: Option<i32>,
-    ) -> Result<MatchListDTO> {
+    ) -> Result<MatchList> {
         let mut url = Url::parse(&format!(
             "https://{}/lol/match/v4/matchlists/by-account/{}",
             region.to_string(),
@@ -82,6 +83,6 @@ impl Match {
                 .append_pair("begin_index", &begin_index.to_string());
         }
 
-        request::<MatchListDTO>(url.as_str(), self.context).await
+        request::<MatchList>(url.as_str(), self.context).await
     }
 }

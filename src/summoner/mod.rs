@@ -1,25 +1,26 @@
 use super::{
-    client::{Client, ClientContext},
-    dto::SummonerDTO,
     enums::Region,
     proxy::{request, Result},
+    types::Summoner as SummonerDTO,
+    Client, ClientContext,
 };
 use url::Url;
 
 impl Client {
-    pub fn summoner(self) -> Summoner {
+    pub fn summoner(&self) -> Summoner {
         Summoner {
-            context: self.context,
+            context: &self.context,
         }
     }
 }
 
+/// Namespace for the summoner related APIs.
 #[derive(Clone)]
-pub struct Summoner {
-    context: ClientContext,
+pub struct Summoner<'a> {
+    context: &'a ClientContext,
 }
 
-impl Summoner {
+impl Summoner<'_> {
     pub async fn get_summoner_by_encrypted_account_id(
         self,
         region: Region,
