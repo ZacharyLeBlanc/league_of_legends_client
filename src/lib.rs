@@ -1,5 +1,7 @@
 //! This crate is an asynchronous client to interact with the League of Legends API.
 //!
+//! ![CI](https://github.com/ZacharyLeBlanc/league_of_legends_client/workflows/CI/badge.svg)
+//!
 //! The Riot API development portal can be found [here](https://developer.riotgames.com/). Please read through the
 //! [documentation](https://developer.riotgames.com/docs/portal) and
 //! [policies](https://developer.riotgames.com/policies/general) before getting started. Riot API endpoints can be
