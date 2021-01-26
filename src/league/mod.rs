@@ -19,7 +19,7 @@ impl Client {
     /// let client = Client::new(ClientOptions::new("EXAMPLE_API_KEY", false));
     ///
     /// // Access the league API methods.
-    /// let league = client.league();
+    /// let league_api = client.league();
     /// ```
     pub fn league(&self) -> League {
         League {
@@ -54,12 +54,12 @@ impl Client {
 ///     .await;
 ///
 /// // Alternatively use this to save some characters.
-/// let league = client.league();
+/// let league_api = client.league();
 ///
-/// challenger_league = league
+/// challenger_league = league_api
 ///     .get_challenger_league(Region::NorthAmerica, Queue::RankedSoloQueue)
 ///     .await;
-/// let grandmaster_league = league
+/// let grandmaster_league = league_api
 ///     .get_grandmaster_league(Region::NorthAmerica, Queue::RankedSoloQueue)
 ///     .await;
 /// #

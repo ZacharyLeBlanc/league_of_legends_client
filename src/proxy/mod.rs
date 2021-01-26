@@ -3,7 +3,7 @@ mod rate_limit;
 use super::{ClientContext, Error};
 use log::{debug, error};
 use rate_limit::RateLimit;
-use reqwest::{header::HeaderMap, Client, Response, StatusCode};
+use reqwest::{header::HeaderMap, Response, StatusCode};
 use serde::de::DeserializeOwned;
 
 pub type Result<T> = std::result::Result<T, Error>;
@@ -95,7 +95,7 @@ pub async fn request<T: DeserializeOwned>(url: &str, context: &ClientContext) ->
             .expect("Unable to parse X-Riot-Token to header."),
     );
 
-    let client = Client::new();
+    let client = &context.http_client;
 
     let response =
         handle_response::<T>(client.get(url).headers(headers.clone()).send().await?).await;
