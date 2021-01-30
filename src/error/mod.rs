@@ -22,16 +22,10 @@ pub enum Error {
     InternalServerError,
     #[error("Service Unavailable")]
     ServiceUnavailable,
-    #[error("ReqwestError")]
-    RequestError {
-        #[from]
-        source: ReqwestError,
-    },
-    #[error("Parse Error")]
-    ParseError {
-        #[from]
-        source: ParseError,
-    },
+    #[error("Request Error: {0}")]
+    RequestError(#[from] ReqwestError),
+    #[error("Parse Error: {0}")]
+    ParseError(#[from] ParseError),
     #[error("Unknown")]
     Unknown,
 }
