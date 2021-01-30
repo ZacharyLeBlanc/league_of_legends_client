@@ -4,14 +4,17 @@
 #[derive(Clone)]
 pub struct ClientOptions {
     /// Riot api key.
-    pub api_key: &'static str,
+    pub(crate) api_key: String,
     /// Setting this option will automatically retry the request if a 429 status code (too many requests) is returned from the riot api.
-    pub retry: bool,
+    pub(crate) retry: bool,
 }
 
 impl ClientOptions {
     /// Constructs an instance of `ClientOptions`.
-    pub fn new(api_key: &'static str, retry: bool) -> Self {
-        ClientOptions { api_key, retry }
+    pub fn new<T: Into<String>>(api_key: T, retry: bool) -> Self {
+        ClientOptions {
+            api_key: api_key.into(),
+            retry,
+        }
     }
 }

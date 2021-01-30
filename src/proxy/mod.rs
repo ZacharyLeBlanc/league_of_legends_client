@@ -1,6 +1,6 @@
 mod rate_limit;
 
-use super::{ClientContext, Error};
+use crate::{ClientContext, Error};
 use log::{debug, error};
 use rate_limit::RateLimit;
 use reqwest::{header::HeaderMap, Response, StatusCode};

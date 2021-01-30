@@ -57,26 +57,8 @@ pub mod types;
 
 use client::context::ClientContext;
 pub use client::options::ClientOptions;
+pub use client::Client;
 pub use error::Error;
 pub use league::League;
 pub use r#match::Match;
-use reqwest::Client as HttpClient;
 pub use summoner::Summoner;
-
-/// An asynchronous `Client` to interact with the League of Legends API.  
-#[derive(Clone)]
-pub struct Client {
-    context: ClientContext,
-}
-
-impl Client {
-    /// Creates a new instance of `Client`.
-    pub fn new(options: ClientOptions) -> Self {
-        Client {
-            context: ClientContext {
-                options,
-                http_client: HttpClient::new(),
-            },
-        }
-    }
-}

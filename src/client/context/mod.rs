@@ -5,7 +5,7 @@ use reqwest::Client as HttpClient;
 #[derive(Clone)]
 pub struct ClientContext {
     /// The `reqwest::Client` used for each request.
-    pub http_client: HttpClient,
+    pub(crate) http_client: HttpClient,
     /// The `ClientOptions` for this `Client`.
-    pub options: ClientOptions,
+    pub(crate) options: ClientOptions,
 }

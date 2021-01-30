@@ -1,4 +1,4 @@
-use super::{
+use crate::{
     enums::Region,
     proxy::{request, Result},
     types::{Match as MatchDTO, MatchList},

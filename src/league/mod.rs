@@ -1,4 +1,4 @@
-use super::{
+use crate::{
     enums::{Division, Queue, Region, Tier},
     proxy::{request, Result},
     types::{LeagueEntry, LeagueList},
